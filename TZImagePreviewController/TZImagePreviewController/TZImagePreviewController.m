@@ -381,10 +381,10 @@
         }
         cell.model = model;
     } else {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
-        TZPhotoPreviewCell *photoPreviewCell = (TZPhotoPreviewCell *)cell;
-        photoPreviewCell.previewView.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
         if ([photo isKindOfClass:[UIImage class]]) {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
+            TZPhotoPreviewCell *photoPreviewCell = (TZPhotoPreviewCell *)cell;
+            photoPreviewCell.previewView.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
             photoPreviewCell.previewView.imageView.image = (UIImage *)photo;
         } else if ([photo isKindOfClass:[NSURL class]]) {
             NSURL *URL = (NSURL *)photo;
@@ -394,14 +394,23 @@
                 TZVideoPreviewCell *videoCell = (TZVideoPreviewCell *)cell;
                 videoCell.videoURL = URL;
             } else if (self.setImageWithURLBlock) {
+                cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
+                TZPhotoPreviewCell *photoPreviewCell = (TZPhotoPreviewCell *)cell;
+                photoPreviewCell.previewView.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
                 self.setImageWithURLBlock(URL, photoPreviewCell.previewView.imageView, ^{
                     [photoPreviewCell recoverSubviews];
                 });
             } else {
+                cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
+                TZPhotoPreviewCell *photoPreviewCell = (TZPhotoPreviewCell *)cell;
+                photoPreviewCell.previewView.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
                 photoPreviewCell.previewView.imageView.image = nil;
                 NSLog(@"【TZImagePreviewController】传入的photos有NSURL对象且不是视频，请参照Demo实现setImageWithURLBlock！");
             }
         } else {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
+            TZPhotoPreviewCell *photoPreviewCell = (TZPhotoPreviewCell *)cell;
+            photoPreviewCell.previewView.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
             photoPreviewCell.previewView.imageView.image = nil;
             NSLog(@"【TZImagePreviewController】photos数组内元素只支持PHAsset、UIImage、NSURL类型！不支持%@类型！", [photo class]);
         }
